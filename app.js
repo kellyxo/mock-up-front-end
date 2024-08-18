@@ -1,6 +1,8 @@
 const API_URL = 'https://memory-lane-app-3b70407d74bf.herokuapp.com/japp';
 let currentUser = localStorage.getItem('currentUser');
 
+axios.defaults.withCredentials = true;
+
 // Redirect to login if currentUser is not set
 if (!currentUser && window.location.pathname !== '/index.html') {
     window.location.href = 'index.html';
@@ -15,8 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
 
+        console.log('Sending login request with payload:', { username, password });
+
         try {
-            const response = await axios.post(`${API_URL}/login`, { username, password });
+            const response = await axios.post(`${API_URL}/login`, { username, password }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             if (response.status === 200) {
                 currentUser = username;
                 localStorage.setItem('currentUser', currentUser);  // Store current user in localStorage
@@ -30,6 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchEntries();  // Fetch entries after login
             }
         } catch (error) {
+            console.error('Login error:', error);
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response headers:', error.response.headers);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+            } else {
+                console.error('Error setting up request:', error.message);
+            }
             alert('Login failed. Please try again.');
         }
     });
