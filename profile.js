@@ -1,4 +1,4 @@
-const API_URL = 'https://memory-lane-app-3b70407d74bf.herokuapp.com/japp'';
+const API_URL = 'https://memory-lane-app-3b70407d74bf.herokuapp.com/japp';
 let currentUser = localStorage.getItem('currentUser');
 
 // Ensure user is logged in
