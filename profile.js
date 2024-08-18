@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8080/japp';
+const API_URL = 'https://your-app-name.herokuapp.com/japp';
 let currentUser = localStorage.getItem('currentUser');
 
 // Ensure user is logged in
