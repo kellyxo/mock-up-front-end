@@ -1,8 +1,6 @@
 const API_URL = 'https://memory-lane-app-3b70407d74bf.herokuapp.com/japp';
 let currentUser = localStorage.getItem('currentUser');
 
-axios.defaults.withCredentials = true;
-
 // Redirect to login if currentUser is not set
 if (!currentUser && window.location.pathname !== '/index.html') {
     window.location.href = 'index.html';
@@ -14,17 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle login form submission
     document.getElementById('login-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const username = document.getElementById('login-username').value;
-        const password = document.getElementById('login-password').value;
-
-        console.log('Sending login request with payload:', { username, password });
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value.trim();
 
         try {
-            const response = await axios.post(`${API_URL}/login`, { username, password }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            const response = await axios.post(`${API_URL}/login`, { username, password });
             if (response.status === 200) {
                 currentUser = username;
                 localStorage.setItem('currentUser', currentUser);  // Store current user in localStorage
@@ -38,16 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchEntries();  // Fetch entries after login
             }
         } catch (error) {
-            console.error('Login error:', error);
-            if (error.response) {
-                console.error('Response data:', error.response.data);
-                console.error('Response status:', error.response.status);
-                console.error('Response headers:', error.response.headers);
-            } else if (error.request) {
-                console.error('No response received:', error.request);
-            } else {
-                console.error('Error setting up request:', error.message);
-            }
             alert('Login failed. Please try again.');
         }
     });
@@ -61,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle registration form submission
     document.getElementById('register-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const username = document.getElementById('register-username').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
+        const username = document.getElementById('register-username').value.trim();
+        const email = document.getElementById('register-email').value.trim();
+        const password = document.getElementById('register-password').value.trim();
 
         try {
             const response = await axios.post(`${API_URL}/create/User`, { username, email, password });
@@ -81,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle create entry form submission
     document.getElementById('create-entry-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const textEntry = document.getElementById('entry-content').value;
+        const textEntry = document.getElementById('entry-content').value.trim();
         const imageFile = document.getElementById('entry-image').files[0];
 
         const formData = new FormData();
