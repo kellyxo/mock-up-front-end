@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+input, textarea, button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#feed-section {
+    margin-top: 30px;
+}
+
+#feed {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.feed-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+.feed-item img {
+    max-width: 100%;
+    height: auto;
+}
