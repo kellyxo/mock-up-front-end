@@ -1,50 +1,63 @@
+// profile.js
 const API_URL = 'https://memory-lane-app-3b70407d74bf.herokuapp.com/japp';
 let currentUser = localStorage.getItem('currentUser');
 
-// Ensure the DOM is fully loaded before running the script
-document.addEventListener('DOMContentLoaded', () => {
-    // Ensure user is logged in
+const $ = (selector) => document.querySelector(selector);
+
+const fetchUserProfile = async (username) => {
+    try {
+        const response = await axios.get(`${API_URL}/getUser`, { params: { username } });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        throw error;
+    }
+};
+
+const updateProfile = async (username, newData) => {
+    try {
+        const response = await axios.patch(`${API_URL}/updateUser/${username}`, newData);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        throw error;
+    }
+};
+
+const displayProfile = (user) => {
+    $('#profile-username').textContent = user.username;
+    $('#profile-email').textContent = user.email;
+    // Add more profile fields as needed
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
     if (!currentUser) {
-        window.location.href = "index.html"; // Redirect to login if not logged in
+        window.location.href = 'index.html';
+        return;
     }
 
-    // Change password logic
-    document.getElementById('change-password').addEventListener('click', async () => {
-        const newPassword = document.getElementById('new-password').value;
+    try {
+        const userProfile = await fetchUserProfile(currentUser);
+        displayProfile(userProfile);
+    } catch (error) {
+        alert('Failed to load profile. Please try again later.');
+    }
 
-        if (!newPassword) {
-            alert('Please enter a new password.');
-            return;
-        }
+    $('#update-profile-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newEmail = $('#new-email').value.trim();
+        const newPassword = $('#new-password').value;
 
         try {
-            await axios.patch(`${API_URL}/changePassword/${currentUser}`, null, {
-                params: { newPassword: newPassword }
-            });
-            alert('Password updated successfully!');
+            await updateProfile(currentUser, { email: newEmail, password: newPassword });
+            alert('Profile updated successfully!');
         } catch (error) {
-            console.error('Error updating password:', error);
-            alert('Failed to update password. Please try again.');
+            alert('Failed to update profile. Please try again.');
         }
     });
 
-    // Delete account logic
-    document.getElementById('delete-account').addEventListener('click', async () => {
-        if (confirm('Are you sure you want to delete your account? This action is permanent and will delete all your entries.')) {
-            try {
-                const username = localStorage.getItem('currentUser'); // Get the current username
-                await axios.request({
-                    method: 'delete',
-                    url: `${API_URL}/delete`,
-                    data: { username: username } // Send username in request body
-                });
-                alert('Account deleted successfully.');
-                localStorage.removeItem('currentUser');
-                window.location.href = "index.html";  // Redirect to login page after account deletion
-            } catch (error) {
-                console.error('Error deleting account:', error);
-                alert('Failed to delete account. Please try again.');
-            }
-        }
+    $('#logout-button').addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'index.html';
     });
 });
