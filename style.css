@@ -1,0 +1,79 @@
+body {
+    background-color: #fff0f5;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+    color: #ff69b4;
+    cursor: url('images/custom-cursor.png'), auto;
+}
+
+.container {
+    background-color: rgba(255, 240, 245, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    padding: 30px;
+    margin-top: 50px;
+}
+
+h1, h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ff1493;
+    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+}
+
+.btn-primary, .btn-success {
+    background-color: #ff69b4;
+    border-color: #ff69b4;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background-color: #ff1493;
+    border-color: #ff1493;
+    transform: scale(1.05);
+}
+
+.form-control {
+    border-color: #ff69b4;
+    box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+}
+
+.form-control:focus {
+    border-color: #ff1493;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+.flower-icon {
+    font-size: 24px;
+    margin: 0 10px;
+    animation: spin 4s linear infinite;
+}
+
+.profile-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+.fade-in { animation: fadeIn 1s ease-in; }
+.bounce { animation: bounce 0.5s ease infinite alternate; }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-10px); }
+}
