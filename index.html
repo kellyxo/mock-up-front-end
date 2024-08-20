@@ -5,178 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Lane</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #ff69b4;
-            --secondary-color: #ff1493;
-            --background-color: #fff0f5;
-            --text-color: #333;
-        }
         body {
+            background-color: #fff0f5;
+            background-image: url('https://marketplace.canva.com/EAFUFiGX5ek/1/0/1600w/canva-colorful-watercolor-floral-linktree-background-qRHfsd-4Nmc.jpg');
+            background-size: cover;
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: #ff69b4;
+            cursor: url('http://www.rw-designer.com/cursor-extern.php?id=66720'), auto;
         }
+
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            background-color: rgba(255, 240, 245, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            padding: 30px;
+            margin-top: 50px;
         }
+
         h1, h2 {
             font-family: 'Pacifico', cursive;
-            color: var(--secondary-color);
+            color: #ff1493;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
         }
-        .flower {
+
+        .btn-primary, .btn-success {
+            background-color: #ff69b4;
+            border-color: #ff69b4;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover, .btn-success:hover {
+            background-color: #ff1493;
+            border-color: #ff1493;
+            transform: scale(1.05);
+        }
+
+        input.form-control {
+            border-color: #ff69b4;
+            box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+        }
+
+        input.form-control:focus {
+            border-color: #ff1493;
+            box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .flower-icon {
             font-size: 24px;
-            margin-left: 10px;
+            margin: 0 10px;
+            animation: spin 4s linear infinite;
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        .bounce {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-10px); }
+        }
+
         .profile-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
             cursor: pointer;
-        }
-        input, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-        }
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: var(--secondary-color);
-        }
-        .link-button {
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .hidden {
-            display: none;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .gallery-item {
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .gallery-item p {
-            padding: 10px;
-            margin: 0;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        @media (max-width: 600px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
+            display: none; /* Hidden by default */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Memory Lane <span class="flower">🌸</span></h1>
-            <img id="profileIcon" src="https://example.com/hello-kitty.jpg" alt="Profile" class="profile-icon">
-        </header>
+    <div class="container mt-5 fade-in">
+        <h1 class="mb-4">Memory Lane <i class="flower-icon">🌸</i></h1>
+        
+        <!-- Profile Icon (initially hidden) -->
+        <img id="profileIcon" class="profile-icon" src="https://i.pinimg.com/736x/8a/01/90/8a01903812976cb052c8db89eb5fbc78.jpg" alt="Profile Icon"> <!-- Replace with your profile icon URL -->
 
-        <main>
-            <section id="loginForm">
-                <h2>Login <span class="flower">🌼</span></h2>
-                <form id="login-form">
-                    <input type="text" id="login-username" placeholder="Username" required>
-                    <input type="password" id="login-password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                <button id="registerButton" class="link-button">Don't have an account? Register here</button>
-            </section>
+        <!-- Login Form -->
+        <div id="loginForm">
+            <h2>Login <i class="flower-icon">🌼</i></h2>
+            <form id="login-form">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="login-username" placeholder="Username" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary bounce">Login</button>
+            </form>
+            <button id="registerButton" class="btn btn-link mt-3">Don't have an account? Register here</button>
+        </div>
 
-            <section id="registerForm" class="hidden">
-                <h2>Register <span class="flower">🌺</span></h2>
-                <form id="register-form">
-                    <input type="text" id="register-username" placeholder="Username" required>
-                    <input type="email" id="register-email" placeholder="Email" required>
-                    <input type="password" id="register-password" placeholder="Password" required>
-                    <button type="submit">Register</button>
-                </form>
-            </section>
+        <!-- Registration Form -->
+        <div id="registerForm" style="display: none;">
+            <h2>Register <i class="flower-icon">🌺</i></h2>
+            <form id="register-form">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="register-username" placeholder="Username" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="register-email" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="register-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-success bounce">Register</button>
+            </form>
+        </div>
 
-            <section id="createEntryForm" class="hidden">
-                <h2>Create Journal Entry <span class="flower">🌻</span></h2>
-                <form id="create-entry-form">
-                    <textarea id="entry-content" rows="3" placeholder="Your journal entry" required></textarea>
-                    <input type="file" id="entry-image" accept="image/*">
-                    <button type="submit">Create Entry</button>
-                </form>
-            </section>
+        <!-- Create Entry Form -->
+        <div id="createEntryForm" style="display: none;">
+            <h2>Create Journal Entry <i class="flower-icon">🌻</i></h2>
+            <form id="create-entry-form">
+                <div class="mb-3">
+                    <textarea class="form-control" id="entry-content" rows="3" placeholder="Your journal entry" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <input type="file" class="form-control" id="entry-image">
+                </div>
+                <button type="submit" class="btn btn-success bounce">Create Entry</button>
+            </form>
+        </div>
 
-            <section id="feed-section" class="hidden">
-                <h2>Journal Feed <span class="flower">🌹</span></h2>
-                <div id="feed" class="gallery"></div>
-            </section>
-        </main>
-    </div>
-
-    <div id="entryModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img id="modal-image" alt="Journal Entry">
-            <p id="modal-text"></p>
-            <p id="modal-date"></p>
+        <!-- Journal Feed -->
+        <div id="feed-section" style="display: none;">
+            <h2>Journal Feed <i class="flower-icon">🌹</i></h2>
+            <div id="feed"></div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
+
