@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Lane</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #fff0f5;
@@ -21,6 +19,8 @@
         .container {
             background-color: rgba(255, 240, 245, 0.9);
             border-radius: 20px;
+            -webkit-box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+            -moz-box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
             box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
             padding: 30px;
             margin-top: 50px;
@@ -35,29 +35,58 @@
         .btn-primary, .btn-success {
             background-color: #ff69b4;
             border-color: #ff69b4;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover, .btn-success:hover {
             background-color: #ff1493;
             border-color: #ff1493;
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            -o-transform: scale(1.05);
             transform: scale(1.05);
         }
 
         input.form-control {
             border-color: #ff69b4;
+            -webkit-box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+            -moz-box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
             box-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
         }
 
         input.form-control:focus {
             border-color: #ff1493;
+            -webkit-box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+            -moz-box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
             box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
         }
 
         .flower-icon {
             font-size: 24px;
             margin: 0 10px;
+            -webkit-animation: spin 4s linear infinite;
+            -moz-animation: spin 4s linear infinite;
+            -o-animation: spin 4s linear infinite;
             animation: spin 4s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @-moz-keyframes spin {
+            0% { -moz-transform: rotate(0deg); }
+            100% { -moz-transform: rotate(360deg); }
+        }
+
+        @-o-keyframes spin {
+            0% { -o-transform: rotate(0deg); }
+            100% { -o-transform: rotate(360deg); }
         }
 
         @keyframes spin {
@@ -66,16 +95,52 @@
         }
 
         .fade-in {
+            -webkit-animation: fadeIn 1s ease-in;
+            -moz-animation: fadeIn 1s ease-in;
+            -o-animation: fadeIn 1s ease-in;
             animation: fadeIn 1s ease-in;
         }
 
         .bounce {
+            -webkit-animation: bounce 0.5s ease infinite alternate;
+            -moz-animation: bounce 0.5s ease infinite alternate;
+            -o-animation: bounce 0.5s ease infinite alternate;
             animation: bounce 0.5s ease infinite alternate;
+        }
+
+        @-webkit-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @-moz-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @-o-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        @-webkit-keyframes bounce {
+            from { -webkit-transform: translateY(0px); }
+            to { -webkit-transform: translateY(-10px); }
+        }
+
+        @-moz-keyframes bounce {
+            from { -moz-transform: translateY(0px); }
+            to { -moz-transform: translateY(-10px); }
+        }
+
+        @-o-keyframes bounce {
+            from { -o-transform: translateY(0px); }
+            to { -o-transform: translateY(-10px); }
         }
 
         @keyframes bounce {
@@ -100,7 +165,7 @@
         <h1 class="mb-4">Memory Lane <i class="flower-icon">🌸</i></h1>
         
         <!-- Profile Icon (initially hidden) -->
-        <img id="profileIcon" class="profile-icon" src="https://i.pinimg.com/736x/8a/01/90/8a01903812976cb052c8db89eb5fbc78.jpg" alt="Profile Icon"> <!-- Replace with your profile icon URL -->
+        <img id="profileIcon" class="profile-icon" src="https://i.pinimg.com/736x/8a/01/90/8a01903812976cb052c8db89eb5fbc78.jpg" alt="Profile Icon">
 
         <!-- Login Form -->
         <div id="loginForm">
@@ -160,4 +225,3 @@
     <script src="app.js"></script>
 </body>
 </html>
-
